@@ -25,6 +25,11 @@ namespace SistemaDePedidos
             {
                 if (f is frmClientes)
                 {
+                    if (f.WindowState == FormWindowState.Minimized)
+                    {
+                        f.WindowState = FormWindowState.Normal;
+                    }
+
                     f.Focus();
                     formFound = true;
                 }
