@@ -19,7 +19,24 @@ namespace SistemaDePedidos
 
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            bool formFound = false;
 
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f is frmClientes)
+                {
+                    f.Focus();
+                    formFound = true;
+                }
+            }
+
+            if (!formFound)
+            {
+                frmClientes formCliente = new frmClientes();
+                formCliente.MdiParent = this;
+                formCliente.Show();
+            }
+            
         }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
