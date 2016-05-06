@@ -26,8 +26,7 @@ namespace SistemaDePedidos
         public frmClientes()
         {
             InitializeComponent();
-            totalRow = totalRows();
-            clients = new Client[totalRow];
+            totalRow = totalRows();            
         }
 
         private void operationMode(OperationMode mode)
@@ -71,7 +70,8 @@ namespace SistemaDePedidos
 
         private void loadData()
         {
-            StreamReader sr = new StreamReader("C:\\Users\\42566937850\\Clientes.txt", Encoding.UTF7);
+            clients = new Client[totalRow];
+            StreamReader sr = new StreamReader("C:\\Users\\42566937850\\Clientes.txt", Encoding.UTF8);
 	        string row = null;
 	        Client client;
             int position = 0;
@@ -80,7 +80,7 @@ namespace SistemaDePedidos
 	        {
 	            string[] columns = row.Split(';');
                 client = new Client();
-                client.code = Convert.ToInt32(columns[0]);
+                client.code = columns[0];
                 client.companyName = columns[1];
                 client.cnpj = columns[2];
                 client.adress = columns[3];
@@ -97,7 +97,7 @@ namespace SistemaDePedidos
 
         private int totalRows()
         {
-            StreamReader sr = new StreamReader("C:\\Users\\42566937850\\Clientes.txt", Encoding.UTF7);
+            StreamReader sr = new StreamReader("C:\\Users\\42566937850\\Clientes.txt", Encoding.UTF8);
             int count=0;
             
             while (sr.ReadLine() != null)
@@ -122,6 +122,12 @@ namespace SistemaDePedidos
             tZipcode.Text = client.zipcode;
         }
 
+        private void saveData()
+        {
+            StreamWriter arq = new StreamWriter("C:\\Users\\42566937850\\Clientes.txt", true, Encoding.UTF8);
+            arq.WriteLine(tCode.Text + ";" + tCompanyName.Text + ";" + tCnpj.Text + ";" + tAddress.Text + ";" + tCity.Text + ";" + cmbState.SelectedItem + ";" + tZipcode.Text);
+            arq.Close();
+        }
         private void btnNext_Click(object sender, EventArgs e)
         {
             if (currentClient < totalRow-1)
@@ -150,6 +156,34 @@ namespace SistemaDePedidos
         {
             currentClient = totalRow-1;
             showData(currentClient);
+        }
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            operationMode(OperationMode.Edition);
+            tCode.Clear();
+            tCompanyName.Clear();
+            tCnpj.Clear();
+            tAddress.Clear();
+            tCity.Clear();
+            cmbState.SelectedIndex = -1;
+            tZipcode.Clear();
+            tCode.Focus();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            operationMode(OperationMode.Navigation);
+            showData(0);
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            saveData();
+            operationMode(OperationMode.Navigation);
+            totalRow++;
+            loadData();
+            showData(0);
         }
     }
 }

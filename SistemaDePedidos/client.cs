@@ -8,7 +8,7 @@ namespace SistemaDePedidos
 {
     struct Client
     {
-        public int code;
+        public string code;
         public string companyName;
         public string cnpj;
         public string adress;

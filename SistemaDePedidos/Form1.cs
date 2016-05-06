@@ -44,6 +44,32 @@ namespace SistemaDePedidos
             
         }
 
+        private void consultaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool formFound = false;
+
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f is dataGrid)
+                {
+                    if (f.WindowState == FormWindowState.Minimized)
+                    {
+                        f.WindowState = FormWindowState.Normal;
+                    }
+
+                    f.Focus();
+                    formFound = true;
+                }
+            }
+
+            if (!formFound)
+            {
+                dataGrid formCliente = new dataGrid();
+                formCliente.MdiParent = this;
+                formCliente.Show();
+            }
+        }
+
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();

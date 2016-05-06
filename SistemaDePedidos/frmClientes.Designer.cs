@@ -84,7 +84,7 @@
             // 
             this.cmbState.FormattingEnabled = true;
             this.cmbState.Items.AddRange(new object[] {
-            "AC \t ",
+            "AC",
             "AL",
             "AM",
             "AP",
@@ -114,7 +114,7 @@
             this.cmbState.Location = new System.Drawing.Point(541, 86);
             this.cmbState.Name = "cmbState";
             this.cmbState.Size = new System.Drawing.Size(57, 21);
-            this.cmbState.TabIndex = 13;
+            this.cmbState.TabIndex = 6;
             // 
             // label7
             // 
@@ -130,7 +130,7 @@
             this.tZipcode.Location = new System.Drawing.Point(9, 132);
             this.tZipcode.Name = "tZipcode";
             this.tZipcode.Size = new System.Drawing.Size(100, 20);
-            this.tZipcode.TabIndex = 11;
+            this.tZipcode.TabIndex = 7;
             // 
             // label6
             // 
@@ -146,7 +146,7 @@
             this.tCity.Location = new System.Drawing.Point(314, 86);
             this.tCity.Name = "tCity";
             this.tCity.Size = new System.Drawing.Size(221, 20);
-            this.tCity.TabIndex = 9;
+            this.tCity.TabIndex = 5;
             // 
             // label5
             // 
@@ -162,7 +162,7 @@
             this.tAddress.Location = new System.Drawing.Point(9, 86);
             this.tAddress.Name = "tAddress";
             this.tAddress.Size = new System.Drawing.Size(299, 20);
-            this.tAddress.TabIndex = 7;
+            this.tAddress.TabIndex = 4;
             // 
             // label4
             // 
@@ -178,7 +178,7 @@
             this.tCnpj.Location = new System.Drawing.Point(468, 43);
             this.tCnpj.Name = "tCnpj";
             this.tCnpj.Size = new System.Drawing.Size(130, 20);
-            this.tCnpj.TabIndex = 5;
+            this.tCnpj.TabIndex = 3;
             // 
             // label3
             // 
@@ -194,7 +194,7 @@
             this.tCompanyName.Location = new System.Drawing.Point(115, 43);
             this.tCompanyName.Name = "tCompanyName";
             this.tCompanyName.Size = new System.Drawing.Size(347, 20);
-            this.tCompanyName.TabIndex = 3;
+            this.tCompanyName.TabIndex = 2;
             // 
             // label2
             // 
@@ -243,25 +243,27 @@
             this.btnCancel.Location = new System.Drawing.Point(551, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(60, 23);
-            this.btnCancel.TabIndex = 3;
+            this.btnCancel.TabIndex = 16;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnOk
             // 
             this.btnOk.Location = new System.Drawing.Point(508, 3);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(37, 23);
-            this.btnOk.TabIndex = 3;
+            this.btnOk.TabIndex = 15;
             this.btnOk.Text = "OK";
             this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
             // btnAlter
             // 
             this.btnAlter.Location = new System.Drawing.Point(373, 3);
             this.btnAlter.Name = "btnAlter";
             this.btnAlter.Size = new System.Drawing.Size(56, 23);
-            this.btnAlter.TabIndex = 7;
+            this.btnAlter.TabIndex = 14;
             this.btnAlter.Text = "Alterar";
             this.btnAlter.UseVisualStyleBackColor = true;
             // 
@@ -270,7 +272,7 @@
             this.btnDel.Location = new System.Drawing.Point(311, 3);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(56, 23);
-            this.btnDel.TabIndex = 3;
+            this.btnDel.TabIndex = 13;
             this.btnDel.Text = "Excluir";
             this.btnDel.UseVisualStyleBackColor = true;
             // 
@@ -279,16 +281,17 @@
             this.btnNew.Location = new System.Drawing.Point(249, 3);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(56, 23);
-            this.btnNew.TabIndex = 6;
+            this.btnNew.TabIndex = 12;
             this.btnNew.Text = "Novo";
             this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // btnLast
             // 
             this.btnLast.Location = new System.Drawing.Point(151, 3);
             this.btnLast.Name = "btnLast";
             this.btnLast.Size = new System.Drawing.Size(37, 23);
-            this.btnLast.TabIndex = 5;
+            this.btnLast.TabIndex = 11;
             this.btnLast.Text = ">>";
             this.btnLast.UseVisualStyleBackColor = true;
             this.btnLast.Click += new System.EventHandler(this.btnLast_Click);
@@ -298,7 +301,7 @@
             this.btnNext.Location = new System.Drawing.Point(108, 3);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(37, 23);
-            this.btnNext.TabIndex = 4;
+            this.btnNext.TabIndex = 10;
             this.btnNext.Text = ">";
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
@@ -308,7 +311,7 @@
             this.btnPrev.Location = new System.Drawing.Point(65, 3);
             this.btnPrev.Name = "btnPrev";
             this.btnPrev.Size = new System.Drawing.Size(37, 23);
-            this.btnPrev.TabIndex = 3;
+            this.btnPrev.TabIndex = 9;
             this.btnPrev.Text = "<";
             this.btnPrev.UseVisualStyleBackColor = true;
             this.btnPrev.Click += new System.EventHandler(this.btnPrev_Click);
@@ -318,7 +321,7 @@
             this.btnFirst.Location = new System.Drawing.Point(22, 3);
             this.btnFirst.Name = "btnFirst";
             this.btnFirst.Size = new System.Drawing.Size(37, 23);
-            this.btnFirst.TabIndex = 2;
+            this.btnFirst.TabIndex = 8;
             this.btnFirst.Text = "<<";
             this.btnFirst.UseVisualStyleBackColor = true;
             this.btnFirst.Click += new System.EventHandler(this.btnFirst_Click);
