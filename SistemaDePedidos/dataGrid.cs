@@ -16,5 +16,10 @@ namespace SistemaDePedidos
         {
             InitializeComponent();
         }
+
+        private void dataGrid_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
