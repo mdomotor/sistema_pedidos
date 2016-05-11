@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace SistemaDePedidos
 {
-    public partial class frmClientes : Form
+    public partial class frmClientes : Form 
     {
         private Client[] clients { get; set; }
         private int totalRow { get; set; }
@@ -71,7 +71,7 @@ namespace SistemaDePedidos
         private void loadData()
         {
             clients = new Client[totalRow];
-            StreamReader sr = new StreamReader("C:\\Users\\42566937850\\Clientes.txt", Encoding.UTF8);
+            StreamReader sr = new StreamReader("C:\\Users\\40795448805\\Clientes.txt", Encoding.UTF8);
 	        string row = null;
 	        Client client;
             int position = 0;
@@ -97,7 +97,7 @@ namespace SistemaDePedidos
 
         private int totalRows()
         {
-            StreamReader sr = new StreamReader("C:\\Users\\42566937850\\Clientes.txt", Encoding.UTF8);
+            StreamReader sr = new StreamReader("C:\\Users\\40795448805\\Clientes.txt", Encoding.UTF8);
             int count=0;
             
             while (sr.ReadLine() != null)
@@ -124,7 +124,7 @@ namespace SistemaDePedidos
 
         private void saveData()
         {
-            StreamWriter arq = new StreamWriter("C:\\Users\\42566937850\\Clientes.txt", true, Encoding.UTF8);
+            StreamWriter arq = new StreamWriter("C:\\Users\\40795448805\\Clientes.txt", true, Encoding.UTF8);
             arq.WriteLine(tCode.Text + ";" + tCompanyName.Text + ";" + tCnpj.Text + ";" + tAddress.Text + ";" + tCity.Text + ";" + cmbState.SelectedItem + ";" + tZipcode.Text);
             arq.Close();
         }
