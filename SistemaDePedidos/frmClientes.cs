@@ -11,10 +11,10 @@ using System.Windows.Forms;
 
 namespace SistemaDePedidos
 {
-    public partial class frmClientes : Form 
+    public partial class frmClientes : Form
     {
-        private Client[] clients { get; set; }
-        private int totalRow { get; set; }
+        private Client[] clients = Client.all();
+        private int totalRow = Client.count();
         private int currentClient { get; set; }
 
         enum OperationMode
@@ -26,7 +26,6 @@ namespace SistemaDePedidos
         public frmClientes()
         {
             InitializeComponent();
-            totalRow = totalRows();            
         }
 
         private void operationMode(OperationMode mode)
@@ -57,56 +56,14 @@ namespace SistemaDePedidos
                     btnAlter.Enabled = false;
                     break;
             }
-            
+
         }
 
         private void frmClientes_Load(object sender, EventArgs e)
         {
             currentClient = 0;
             operationMode(OperationMode.Navigation);
-            loadData();
             showData(currentClient);
-        }
-
-        private void loadData()
-        {
-            clients = new Client[totalRow];
-            StreamReader sr = new StreamReader("C:\\Users\\40795448805\\Clientes.txt", Encoding.UTF8);
-	        string row = null;
-	        Client client;
-            int position = 0;
-
-            while ((row = sr.ReadLine()) != null)
-	        {
-	            string[] columns = row.Split(';');
-                client = new Client();
-                client.code = columns[0];
-                client.companyName = columns[1];
-                client.cnpj = columns[2];
-                client.adress = columns[3];
-                client.city = columns[4];
-                client.state = columns[5];
-                client.zipcode = columns[6];
-                
-                clients[position] = client;
-                position++;
-	        }
-            
-            sr.Close();
-        }
-
-        private int totalRows()
-        {
-            StreamReader sr = new StreamReader("C:\\Users\\40795448805\\Clientes.txt", Encoding.UTF8);
-            int count=0;
-            
-            while (sr.ReadLine() != null)
-            {
-                count++;
-            }
-            
-            sr.Close();
-            return count;
         }
 
         private void showData(int row)
@@ -116,7 +73,7 @@ namespace SistemaDePedidos
             tCode.Text = client.code.ToString();
             tCompanyName.Text = client.companyName;
             tCnpj.Text = client.cnpj;
-            tAddress.Text = client.adress;
+            tAddress.Text = client.address;
             tCity.Text = client.city;
             cmbState.SelectedItem = client.state;
             tZipcode.Text = client.zipcode;
@@ -124,13 +81,11 @@ namespace SistemaDePedidos
 
         private void saveData()
         {
-            StreamWriter arq = new StreamWriter("C:\\Users\\40795448805\\Clientes.txt", true, Encoding.UTF8);
-            arq.WriteLine(tCode.Text + ";" + tCompanyName.Text + ";" + tCnpj.Text + ";" + tAddress.Text + ";" + tCity.Text + ";" + cmbState.SelectedItem + ";" + tZipcode.Text);
-            arq.Close();
+            Client.save(code: tCode.Text, companyName: tCompanyName.Text, cnpj: tCnpj.Text, address: tAddress.Text, city: tCity.Text, state: cmbState.SelectedItem.ToString(), zipcode: tZipcode.Text);
         }
         private void btnNext_Click(object sender, EventArgs e)
         {
-            if (currentClient < totalRow-1)
+            if (currentClient < totalRow - 1)
             {
                 currentClient++;
                 showData(currentClient);
@@ -154,7 +109,7 @@ namespace SistemaDePedidos
 
         private void btnLast_Click(object sender, EventArgs e)
         {
-            currentClient = totalRow-1;
+            currentClient = totalRow - 1;
             showData(currentClient);
         }
 
@@ -182,7 +137,7 @@ namespace SistemaDePedidos
             saveData();
             operationMode(OperationMode.Navigation);
             totalRow++;
-            loadData();
+            clients = Client.all();
             showData(0);
         }
     }

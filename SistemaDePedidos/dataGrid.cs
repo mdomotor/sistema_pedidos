@@ -16,12 +16,10 @@ namespace SistemaDePedidos
         public dataGrid()
         {
             InitializeComponent();
-            totalRow = totalRows();
         }
 
         private void dataGrid_Load(object sender, EventArgs e)
         {
-            loadData();
             createGridAndFill();
         }
 
@@ -49,53 +47,12 @@ namespace SistemaDePedidos
         private void fillGrid()
         {
             foreach (Client client in clients) {
-                dataGridView.Rows.Add(client.code, client.companyName, client.cnpj, client.adress, client.city, client.state, client.zipcode);
+                dataGridView.Rows.Add(client.code, client.companyName, client.cnpj, client.address, client.city, client.state, client.zipcode);
             }
         }
 
-        private void loadData()
-        {
-            clients = new Client[totalRow];
-            StreamReader sr = new StreamReader("C:\\Users\\40795448805\\Clientes.txt", Encoding.UTF8);
-            string row = null;
-            Client client;
-            int position = 0;
+        private Client[] clients = Client.all();
 
-            while ((row = sr.ReadLine()) != null)
-            {
-                string[] columns = row.Split(';');
-                client = new Client();
-                client.code = columns[0];
-                client.companyName = columns[1];
-                client.cnpj = columns[2];
-                client.adress = columns[3];
-                client.city = columns[4];
-                client.state = columns[5];
-                client.zipcode = columns[6];
-
-                clients[position] = client;
-                position++;
-            }
-
-            sr.Close();
-        }
-
-        private int totalRows()
-        {
-            StreamReader sr = new StreamReader("C:\\Users\\40795448805\\Clientes.txt", Encoding.UTF8);
-            int count = 0;
-
-            while (sr.ReadLine() != null)
-            {
-                count++;
-            }
-
-            sr.Close();
-            return count;
-        }
-
-        private Client[] clients { get; set; }
-
-        private int totalRow { get; set; }
+        private int totalRow = Client.count();
     }
 }
