@@ -16,11 +16,14 @@ namespace SistemaDePedidos
         private Client[] clients = Client.all();
         private int totalRow = Client.count();
         private int currentClient { get; set; }
+        private OperationMode operationControl { get; set; }
 
         enum OperationMode
         {
             Navigation,
-            Edition
+            Edition,
+            Update,
+            Create
         }
 
         public frmClientes()
@@ -42,6 +45,13 @@ namespace SistemaDePedidos
                     btnNew.Enabled = true;
                     btnDel.Enabled = true;
                     btnAlter.Enabled = true;
+                    tCode.Enabled = false;
+                    tCompanyName.Enabled = false;
+                    tCnpj.Enabled = false;
+                    tAddress.Enabled = false;
+                    tCity.Enabled = false;
+                    cmbState.Enabled = false;
+                    tZipcode.Enabled = false;
                     break;
 
                 case OperationMode.Edition:
@@ -54,6 +64,13 @@ namespace SistemaDePedidos
                     btnNew.Enabled = false;
                     btnDel.Enabled = false;
                     btnAlter.Enabled = false;
+                    tCode.Enabled = true;
+                    tCompanyName.Enabled = true;
+                    tCnpj.Enabled = true;
+                    tAddress.Enabled = true;
+                    tCity.Enabled = true;
+                    cmbState.Enabled = true;
+                    tZipcode.Enabled = true;
                     break;
             }
 
@@ -81,7 +98,7 @@ namespace SistemaDePedidos
 
         private void saveData()
         {
-            Client.save(code: tCode.Text, companyName: tCompanyName.Text, cnpj: tCnpj.Text, address: tAddress.Text, city: tCity.Text, state: cmbState.SelectedItem.ToString(), zipcode: tZipcode.Text);
+            Client.create(code: tCode.Text, companyName: tCompanyName.Text, cnpj: tCnpj.Text, address: tAddress.Text, city: tCity.Text, state: cmbState.SelectedItem.ToString(), zipcode: tZipcode.Text);
         }
         private void btnNext_Click(object sender, EventArgs e)
         {
@@ -116,6 +133,76 @@ namespace SistemaDePedidos
         private void btnNew_Click(object sender, EventArgs e)
         {
             operationMode(OperationMode.Edition);
+            operationControl = OperationMode.Create;
+            clearAll();
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            operationMode(OperationMode.Navigation);
+            if (totalRow == 0) clearAll();
+            else showData(currentClient);
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            if (operationControl == OperationMode.Create)
+            {
+                saveData();
+                totalRow = Client.count();
+                clients = Client.all();
+                currentClient = totalRow - 1;
+                showData(currentClient);
+            }
+            else if (operationControl == OperationMode.Update)
+            {
+                updateData(currentClient);
+                clients = Client.all();
+            }
+
+            operationMode(OperationMode.Navigation);
+            
+        }
+
+        private void updateData(int row)
+        {
+            Client client = new Client();
+            client.code = tCode.Text;
+            client.companyName = tCompanyName.Text;
+            client.cnpj = tCnpj.Text;
+            client.address = tAddress.Text;
+            client.city = tCity.Text;
+            client.state = cmbState.SelectedItem.ToString();
+            client.zipcode = tZipcode.Text;
+
+            Client.update(row, client);
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            Client.delete(clients[currentClient].code);
+            clients = Client.all();
+            currentClient = totalRow = Client.count();
+
+            if (totalRow == 0)
+            {
+                clearAll();
+            }
+            else
+            {
+                --currentClient;
+                showData(currentClient);
+            }
+        }
+
+        private void btnAlter_Click(object sender, EventArgs e)
+        {
+            operationMode(OperationMode.Edition);
+            operationControl = OperationMode.Update;
+        }
+
+        private void clearAll()
+        {
             tCode.Clear();
             tCompanyName.Clear();
             tCnpj.Clear();
@@ -124,21 +211,6 @@ namespace SistemaDePedidos
             cmbState.SelectedIndex = -1;
             tZipcode.Clear();
             tCode.Focus();
-        }
-
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            operationMode(OperationMode.Navigation);
-            showData(0);
-        }
-
-        private void btnOk_Click(object sender, EventArgs e)
-        {
-            saveData();
-            operationMode(OperationMode.Navigation);
-            totalRow++;
-            clients = Client.all();
-            showData(0);
         }
     }
 }

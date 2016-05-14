@@ -266,6 +266,7 @@
             this.btnAlter.TabIndex = 14;
             this.btnAlter.Text = "Alterar";
             this.btnAlter.UseVisualStyleBackColor = true;
+            this.btnAlter.Click += new System.EventHandler(this.btnAlter_Click);
             // 
             // btnDel
             // 
@@ -275,6 +276,7 @@
             this.btnDel.TabIndex = 13;
             this.btnDel.Text = "Excluir";
             this.btnDel.UseVisualStyleBackColor = true;
+            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
             // btnNew
             // 

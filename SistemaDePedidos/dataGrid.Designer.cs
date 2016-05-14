@@ -52,7 +52,7 @@
             this.ClientSize = new System.Drawing.Size(578, 290);
             this.Controls.Add(this.dataGridView);
             this.Name = "dataGrid";
-            this.Text = "dataGrid";
+            this.Text = "Consulta de Clientes";
             this.Load += new System.EventHandler(this.dataGrid_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);

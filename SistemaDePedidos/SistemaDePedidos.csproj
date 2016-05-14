@@ -59,7 +59,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classification.cs" />
     <Compile Include="client.cs" />
+    <Compile Include="ConsultaGrid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ConsultaGrid.Designer.cs">
+      <DependentUpon>ConsultaGrid.cs</DependentUpon>
+    </Compile>
     <Compile Include="dataGrid.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,8 +85,19 @@
     <Compile Include="frmClientes.Designer.cs">
       <DependentUpon>frmClientes.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMovProdutos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMovProdutos.Designer.cs">
+      <DependentUpon>frmMovProdutos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Product.cs" />
+    <Compile Include="ProductChange.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ConsultaGrid.resx">
+      <DependentUpon>ConsultaGrid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dataGrid.resx">
       <DependentUpon>dataGrid.cs</DependentUpon>
     </EmbeddedResource>
@@ -88,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmClientes.resx">
       <DependentUpon>frmClientes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMovProdutos.resx">
+      <DependentUpon>frmMovProdutos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

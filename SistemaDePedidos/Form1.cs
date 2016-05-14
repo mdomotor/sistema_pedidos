@@ -74,5 +74,57 @@ namespace SistemaDePedidos
         {
             Application.Exit();
         }
+
+        private void pedidosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            bool formFound = false;
+
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f is frmMovProdutos)
+                {
+                    if (f.WindowState == FormWindowState.Minimized)
+                    {
+                        f.WindowState = FormWindowState.Normal;
+                    }
+
+                    f.Focus();
+                    formFound = true;
+                }
+            }
+
+            if (!formFound)
+            {
+                frmMovProdutos formCliente = new frmMovProdutos();
+                formCliente.MdiParent = this;
+                formCliente.Show();
+            }
+        }
+
+        private void consultaToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            bool formFound = false;
+
+            foreach (Form f in Application.OpenForms)
+            {
+                if (f is ConsultaGrid)
+                {
+                    if (f.WindowState == FormWindowState.Minimized)
+                    {
+                        f.WindowState = FormWindowState.Normal;
+                    }
+
+                    f.Focus();
+                    formFound = true;
+                }
+            }
+
+            if (!formFound)
+            {
+                ConsultaGrid formCliente = new ConsultaGrid();
+                formCliente.MdiParent = this;
+                formCliente.Show();
+            }
+        }
     }
 }
