@@ -20,6 +20,7 @@ namespace SistemaDePedidos
         public Client()
         {
         }
+       
         public static string PATH
         {
             get
@@ -34,6 +35,7 @@ namespace SistemaDePedidos
                 return PATH + "Clientes.txt";
             }
         }
+        
         public static int count()
         {
             StreamReader sr = new StreamReader(FILE, Encoding.UTF8);
