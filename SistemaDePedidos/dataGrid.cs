@@ -52,7 +52,5 @@ namespace SistemaDePedidos
         }
 
         private Client[] clients = Client.all();
-
-        private int totalRow = Client.count();
     }
 }

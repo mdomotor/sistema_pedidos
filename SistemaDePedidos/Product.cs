@@ -19,7 +19,7 @@ namespace SistemaDePedidos
         {
             get
             {
-                return "C:\\Users\\42566937850\\";
+                return "C:\\Users\\40795448805\\";
             }
         }
         public static string FILE
@@ -58,7 +58,7 @@ namespace SistemaDePedidos
                 product = new Product();
                 product.code = columns[0];
                 product.description = columns[1];
-                product.classification = columns[2];
+                product.classification = Classification.find(columns[2]);
                 product.stock = Convert.ToInt32(columns[3]);
 
                 products[position] = product;
@@ -67,6 +67,52 @@ namespace SistemaDePedidos
             sr.Close();
 
             return products;
+        }
+
+        public static Product findByDescription(string description)
+        {
+            Product product = new Product();
+            StreamReader sr = new StreamReader(FILE, Encoding.UTF8);
+
+            string row = null;
+            while ((row = sr.ReadLine()) != null)
+            {
+                string[] columns = row.Split(';');
+
+                if (columns[1] == description)
+                {
+                    product.code = columns[0];
+                    product.description = description;
+                    product.classification = Classification.find(columns[2]);
+                    product.stock = Convert.ToInt32(columns[3]);
+                    break;
+                }
+            }
+
+            return product;
+        }
+
+        public static Product find(string code)
+        {
+            Product product = new Product();
+            StreamReader sr = new StreamReader(FILE, Encoding.UTF8);
+
+            string row = null;
+            while ((row = sr.ReadLine()) != null)
+            {
+                string[] columns = row.Split(';');
+
+                if (columns[0] == code)
+                {
+                    product.code = code;
+                    product.description = columns[1];
+                    product.classification = Classification.find(columns[2]);
+                    product.stock = Convert.ToInt32(columns[3]);
+                    break;
+                }
+            }
+
+            return product;
         }
     }
 }

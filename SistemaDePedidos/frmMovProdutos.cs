@@ -19,7 +19,15 @@ namespace SistemaDePedidos
 
         private void saveData()
         {
-            ProductChange.create(operation: tOperation.Text, date: tDate.Text, product: cmbProduct.SelectedItem, productClass: tProduct.Text, opType: cmbOpType.SelectedItem.ToString(), qtt: Convert.ToInt32(tQtt.Text));
+            Product product = Product.findByDescription(cmbProduct.SelectedItem.ToString());
+
+
+            ProductChange.create(operation: tOperation.Text, 
+                                 date: tDate.Text, 
+                                 product: product,
+                                 opType: cmbOpType.SelectedItem.ToString(), 
+                                 qtt: Convert.ToInt32(tQtt.Text)
+                                );
             
         }
 
@@ -41,6 +49,17 @@ namespace SistemaDePedidos
         private void btnCancel_Click(object sender, EventArgs e)
         {
             clearAll();
+        }
+
+        private void frmMovProdutos_Load(object sender, EventArgs e)
+        {
+            Product[] products = Product.all();
+
+            foreach (Product product in products) {
+                cmbProduct.Items.Add(product.description);
+            }
+
+            cmbProduct.DropDownStyle = ComboBoxStyle.DropDownList;
         }
     }
 }

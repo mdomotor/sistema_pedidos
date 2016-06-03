@@ -44,14 +44,37 @@ namespace SistemaDePedidos
 
         private void fillGrid()
         {
+
             foreach (Product prod in products)
             {
-                dataGridEstoque.Rows.Add(prod.code, prod.description, prod.stock);
+                int stock = calculateCurrentStock(prod);
+                dataGridEstoque.Rows.Add(prod.code, prod.description, stock, prod.stock);
             }
         }
 
-        private Product[] products = Product.all();
+        private int calculateCurrentStock(Product product)
+        {
+            int stock = 0;
 
-        private int totalRow = Product.count();
+            foreach (ProductChange change in productChanges)
+            {
+                if (change.product.code == product.code)
+                {
+                    if (change.opType == "E")
+                    {
+                        stock += change.qtt;
+                    }
+                    else
+                    {
+                        stock -= change.qtt;
+                    }
+                }
+            }
+
+            return stock;
+        }
+
+        private Product[] products = Product.all();
+        private ProductChange[] productChanges = ProductChange.all();
     }
 }
